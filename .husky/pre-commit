@@ -1,5 +1,15 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx prettier --check .
+echo "🔍 Running lint & format check..."
+
+# Auto-fix formatting with Prettier
+npx prettier --write .
+
+# Run ESLint (auto-fix where possible)
 npx eslint . --fix
+
+# Add changes again after auto-fix
+git add .
+
+echo "✅ Pre-commit checks passed!"
